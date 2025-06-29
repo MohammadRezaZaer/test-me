@@ -1,14 +1,11 @@
-import { Metadata } from 'next';
-import * as React from 'react';
-
 import '@/styles/globals.css';
-// !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
-import '@/styles/colors.css';
 
+
+import { Metadata } from 'next';
+
+import { Toaster } from '@/components/sonner';
 import { siteConfig } from '@/constant/config';
 
-// !STARTERCONF Change these default meta
-// !STARTERCONF Look at @/constant/config to change them
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -24,7 +21,7 @@ export const metadata: Metadata = {
     shortcut: '/favicon/favicon-16x16.png',
     apple: '/favicon/apple-touch-icon.png',
   },
-  manifest: `/favicon/site.webmanifest`,
+  manifest: `/manifest.json`,
   openGraph: {
     url: siteConfig.url,
     title: siteConfig.title,
@@ -49,14 +46,14 @@ export const metadata: Metadata = {
   // ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html>
-      <body>{children}</body>
+    <html lang='fa' dir={'rtl'}>
+      <body>
+        {props.children}
+
+        <Toaster richColors position='top-right' />
+      </body>
     </html>
   );
 }

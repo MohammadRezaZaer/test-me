@@ -1,6 +1,8 @@
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
-
+const brandColor = '#6E21FF';
+const brandColorDark = '#748E63';
+const secondaryColor = '#FFAF59';
 export default {
     darkMode: ['class'],
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -13,6 +15,13 @@ export default {
                 ]
   		},
   		colors: {
+        brand: {
+          DEFAULT: brandColor,
+          secondary: secondaryColor,
+
+          dark: brandColorDark,
+
+        },
   			primary: {
   				'50': 'rgb(var(--tw-color-primary-50) / <alpha-value>)',
   				'100': 'rgb(var(--tw-color-primary-100) / <alpha-value>)',
