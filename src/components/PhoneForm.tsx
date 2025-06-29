@@ -6,7 +6,6 @@ import { Input } from '@/components/ui/input'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-
 import { faToEnDigits } from '@/lib/utils'
 import { atom, useAtom } from 'jotai';
 import { FIELDS, PhoneInputInfer, phoneSchema } from '@/schema/schemas';
@@ -41,14 +40,14 @@ export default function PhoneForm({ onSuccess }: any) {
     }
     if (result.success) {
       // مقایسه شماره جدید با شماره قبلی
-      if (data.mobile !== prevPhone) {
+      if (data[FIELDS.MOBILE] !== prevPhone) {
         // اگر شماره جدید با شماره قبلی متفاوت بود، شمارنده را به مقدار اولیه بازگردانیم
         setSecondsLeft(150)
       }
 
       // ذخیره شماره موبایل جدید برای مقایسه در دفعات بعدی
-      setPrevPhone(data.mobile)
-      onSuccess(result?.data.mobile)
+      setPrevPhone(data[FIELDS.MOBILE])
+      onSuccess(result?.data[FIELDS.MOBILE])
     }
   }
 

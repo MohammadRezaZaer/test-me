@@ -16,3 +16,8 @@ export const ROUTES = {
   },
 
 }
+export const SIDEBAR_WIDTH = {
+  collapsed: 'w-20',
+  expanded: 'w-80',
+  min: 'min-w-12',
+};

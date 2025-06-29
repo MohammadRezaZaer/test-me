@@ -4,9 +4,8 @@ import { useState } from 'react';
 import { Sidebar } from '@/components/sidebar';
 import { Header } from '@/components/header';
 import { DeskSideBar } from '@/components/deskSideBar';
-import { cn } from '@/lib/utils';
 import {BackLink} from "@/components/Back-Link";
-import {DashboardNavigationItems, navigation} from "@/utils/navigations-and_other_sets";
+import {DashboardNavigationItems, navigation} from "@/lib/navigations-and_other_sets";
 
 type Props = {
     children: React.ReactNode;

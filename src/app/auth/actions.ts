@@ -1,6 +1,6 @@
 'use server';
 import { setLoginCookie } from '@/lib/auth';
-import { OtpInputInfer, otpSchema, PhoneInputInfer, phoneSchema } from '@/schema/schemas';
+import { FIELDS, OtpInputInfer, otpSchema, PhoneInputInfer, phoneSchema } from '@/schema/schemas';
 
 
 
@@ -37,11 +37,11 @@ export async function verifyOtpAction( formData: OtpInputInfer) {
     if (!parsed.success) {
         return { success: false, error: parsed.error.flatten().fieldErrors };
     }
-    const isOtpCorrect = formData.otp === '123456'; // demo
+    const isOtpCorrect = formData[FIELDS.OTP] === '12345'; // demo
 
     if (!isOtpCorrect) {
         return { success: false, error: { otp: ['کد اشتباه است'] } };
     }
-    setLoginCookie(parsed.data.mobile);
+    setLoginCookie(parsed.data[FIELDS.MOBILE]);
     return { success: true };
 }

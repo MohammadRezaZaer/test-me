@@ -62,6 +62,7 @@ export default function OtpForm({mobile, onBack, onSuccess}: {
   });
 
   const handleSubmit: SubmitHandler<OtpInputInfer> = data => {
+    console.log({data});
     verifyOtp(data);
   };
 
