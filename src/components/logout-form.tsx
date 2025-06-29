@@ -15,15 +15,18 @@ import { ArrowRight, LogOut } from "lucide-react";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import {cn} from "@/lib/utils";
+import { cn, userAtom } from '@/lib/utils';
 import { ROUTES } from '@/lib/constants';
+import { useSetAtom } from 'jotai'
 
 export default function LogoutForm({ className }) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const setUser = useSetAtom(userAtom)
 
   const handleLogout = () => {
     startTransition(async () => {
+      setUser(null)
       await logoutAction(); // اجرای server action
       toast.success('با موفقیت خارج شدید!');
       router.push(ROUTES.AUTH); // هدایت به صفحه لاگین یا صفحه اصلی

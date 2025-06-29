@@ -19,9 +19,11 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { ResendOtpButton } from '@/components/ui/ResendOtpButton';
+import { useAtom } from 'jotai'
 
 import { verifyOtpAction } from '@/app/auth/actions';
 import { FIELDS, OtpInputInfer, otpSchema } from '@/schema/schemas';
+import { userAtom } from '@/lib/utils';
 
 
 export default function OtpForm({mobile, onBack, onSuccess}: {
@@ -38,13 +40,17 @@ export default function OtpForm({mobile, onBack, onSuccess}: {
       [FIELDS.MOBILE]: mobile,
     },
   });
+  const [, setUser] = useAtom(userAtom)
 
   const {mutate: verifyOtp, isPending} = useMutation({
     mutationFn: verifyOtpAction,
     onSuccess: (result) => {
-      if (result.success) {
+      if (result.success && result.user) {
+        // 1) write into Jotai (and localStorage under the hood)
+        setUser(result.user)
+        // 2) redirect, toast, etc…
         toast.success('با موفقیت وارد شدید!');
-        onSuccess?.(); // Optional external callback
+
         router.push(ROUTES.DASHBOARD.default);
       } else if (result.error) {
         toast.error('کد وارد شده معتبر نیست.');

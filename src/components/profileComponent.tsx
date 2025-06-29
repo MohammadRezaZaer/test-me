@@ -1,9 +1,10 @@
 import {Menu, Transition} from "@headlessui/react";
 import React, {Fragment} from "react";
-import { cn } from '@/lib/utils';
+import { cn, userAtom } from '@/lib/utils';
 import { ROUTES, TextBucket } from '@/lib/constants';
 import { ChevronDownIcon } from 'lucide-react';
 import LogoutForm from '@/components/logout-form';
+import { useAtom } from 'jotai'
 
 const userNavigation = [
     {name: 'داشبورد', href: ROUTES.DASHBOARD.default},
@@ -12,19 +13,26 @@ const userNavigation = [
 ]
 
 export function ProfileComponent() {
-    return <>
+
+  const [user] = useAtom(userAtom)
+
+
+  return <>
         {/* Profile dropdown */}
         <Menu as="div" className="relative">
             <Menu.Button className="ml-4 flex w-full items-center min-w-[28px] p-1.5" >
                 <span className="sr-only">Open user menu</span>
                 <img
                     className="h-8 w-8 rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    src={user?.picture?.thumbnail}
                     alt=""
                 />
                 <span className="hidden lg:flex lg:items-center">
                       <span className="mr-4 whitespace-nowrap text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">
-                        سجاد تهامی
+                        {[user?.name?.title, user?.name?.first, user?.name?.last]
+                          .filter(Boolean)
+                          .join(' ')
+                          .trim()}
                       </span>
                       <ChevronDownIcon className="mr-2 h-5 w-5 text-gray-400" aria-hidden="true"/>
                     </span>
