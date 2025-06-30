@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "clean": "rimraf \"{node_modules,.next,.cache}\"",
+
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -34,6 +36,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.53.2",
+    "jotai": "^2.12.4",
+    "sonner": "^1.7.4",
 
     "react-icons": "^5.4.0",
     "react-multi-date-picker": "^4.5.2",
@@ -43,6 +47,8 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "rimraf": "5.0.5",
+
     "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
     "@svgr/webpack": "^8.1.0",
